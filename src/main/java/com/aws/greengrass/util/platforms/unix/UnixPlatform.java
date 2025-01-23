@@ -312,6 +312,7 @@ public class UnixPlatform extends Platform {
     private void killProcess(boolean force, UserDecorator decorator, Integer pid)
             throws IOException, InterruptedException {
         String[] cmd = {"kill", "-" + (force ? SIGKILL : SIGTERM), Integer.toString(pid)};
+        cmd = getShellDecorator().decorate(cmd);
         if (decorator != null) {
             cmd = decorator.decorate(cmd);
         }
